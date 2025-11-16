@@ -33,30 +33,41 @@ const categories: Category[] = [
 
 const CategoryCard: React.FC<{ category: Category }> = ({ category }) => {
   return (
-    <div className="group p-4 border rounded-md flex items-center gap-4 bg-white border-gray-200 hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-      <div className="flex items-center justify-center p-2 rounded-md bg-blue-100 text-blue-500 hover:bg-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+    <article
+      tabIndex={0}
+      className="group flex items-center gap-4 rounded-2xl border border-gray-100 bg-white/90 p-4 shadow-sm outline-none transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:border-blue-400"
+    >
+      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-500 transition-colors duration-300 group-hover:bg-blue-500 group-hover:text-white">
         {category.icon}
       </div>
       <div>
         <h3 className="text-sm font-semibold text-gray-900">{category.title}</h3>
         <p className="text-xs text-gray-500">{category.places} places disponibles</p>
       </div>
-    </div>
+    </article>
   );
 };
 
 export default function PopularCategorySection() {
   return (
-    <section className="py-8 bg-white">
+    <section className="bg-white py-12">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-semibold mb-2">Catégorie populaire</h2>
-          <button className="flex items-center text-blue-500 border border-gray-100 px-4 py-2 rounded-lg group transition-colors duration-300 hover:bg-blue-500 hover:text-white">
-            Voir Plus
-            <ArrowRight className="h-5 w-5 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
+              Explorer
+            </p>
+            <h2 className="text-3xl font-semibold text-gray-900">Catégories populaires</h2>
+          </div>
+          <button
+            type="button"
+            className="flex items-center justify-center gap-2 rounded-full border border-blue-100 px-5 py-2 text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-600 hover:text-white"
+          >
+            Voir plus
+            <ArrowRight className="h-4 w-4" />
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {categories.map((cat) => (
             <CategoryCard key={cat.id} category={cat} />
           ))}

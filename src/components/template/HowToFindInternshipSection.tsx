@@ -42,31 +42,34 @@ const steps: Step[] = [
 
 const StepCard: React.FC<{ step: Step }> = ({ step }) => {
   return (
-    <div className="group p-6 hover:bg-white rounded-xl hover:shadow-lg flex flex-col items-center text-center">
-      {/* Icône avec fond bleu */}
-      <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white group-hover:bg-blue-500">
-        <span className="text-blue-500 group-hover:text-white">
-          {step.icon}
+    <article className="group flex flex-col items-center rounded-2xl border border-gray-100 bg-white/80 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+      <div className="relative">
+        <div className="h-16 w-16 rounded-full bg-blue-50 text-blue-600 transition-colors duration-300 group-hover:bg-blue-500 group-hover:text-white">
+          <div className="flex h-full w-full items-center justify-center text-lg">{step.icon}</div>
+        </div>
+        <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-semibold text-blue-600 shadow">
+          {step.id}
         </span>
       </div>
-
-      {/* Titre */}
       <h3 className="mt-4 text-lg font-semibold text-gray-900">{step.title}</h3>
-
-      {/* Description */}
       <p className="mt-2 text-sm text-gray-500">{step.description}</p>
-    </div>
+    </article>
   );
 };
 
 export default function HowToFindInternship() {
   return (
-    <section className="py-24 bg-gray-50 bg-cover bg-center">
+    <section className="bg-gray-50 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl mb-12 font-semibold text-center">
-          Comment trouvé un stage
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
+            Votre parcours
+          </p>
+          <h2 className="mt-2 text-3xl font-semibold text-gray-900">
+            Comment trouver un stage en toute sérénité
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step) => (
             <StepCard key={step.id} step={step} />
           ))}
