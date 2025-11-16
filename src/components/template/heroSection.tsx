@@ -54,45 +54,54 @@ const stats = [
 
 export default function HeroSection() {
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="container mx-auto">
-        <div className="md:flex flex-wrap items-center justify-center">
-          <div className="md:w-1/2 flex flex-col justify-center items-center gap-6 md:p-12 sm:p-8 p-4 text-center md:text-left">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50/40 to-white py-16">
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.15),_transparent_60%)] lg:block" />
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_480px]">
+          <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
             <span className="inline-flex items-center rounded-full bg-blue-50 px-4 py-1 text-sm font-medium text-blue-600">
               Une plateforme pensée pour les étudiants ambitieux
             </span>
-            <h1 className="md:text-5xl sm:text-4xl text-3xl font-medium leading-tight">
-              Trouvez un stage qui corresponde à vos intérêts et à vos
-              compétences.
+            <h1 className="text-3xl font-medium leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
+              Trouvez un stage qui corresponde à vos intérêts et à vos compétences.
             </h1>
-            <p className="md:text-lg text-gray-600">
-              Parcourez des milliers d’offres vérifiées, postulez en un clic et
-              suivez vos candidatures depuis un tableau de bord intuitif.
+            <p className="text-base text-gray-600 sm:text-lg">
+              Parcourez des milliers d’offres vérifiées, postulez en un clic et suivez vos candidatures depuis un tableau de bord intuitif.
             </p>
             <HeroSectionForm />
-            <ul className="grid w-full gap-3 text-sm text-gray-600 sm:grid-cols-2">
-              <li className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 shadow-sm">
+            <ul className="grid w-full gap-3 text-left text-sm text-gray-600 sm:grid-cols-2">
+              <li className="flex items-center gap-2 rounded-xl bg-white/90 px-4 py-2 shadow-sm backdrop-blur">
                 <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden />
                 Notifications instantanées pour chaque nouvelle offre
               </li>
-              <li className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 shadow-sm">
+              <li className="flex items-center gap-2 rounded-xl bg-white/90 px-4 py-2 shadow-sm backdrop-blur">
                 <span className="h-2 w-2 rounded-full bg-blue-500" aria-hidden />
                 Matching intelligent avec votre profil
               </li>
             </ul>
           </div>
-          <div className="md:w-1/2 flex items-center justify-between ">
-            <div></div>
-            <Image
-              width={700}
-              height={700}
-              src="/hero-image.svg"
-              alt="hero-image"
-              className="flex items-end justify-end"
-            />
+          <div className="relative mx-auto flex max-w-md items-center justify-center lg:max-w-none">
+            <div className="relative w-full overflow-hidden rounded-[32px] border border-blue-100 bg-white shadow-2xl">
+              <Image
+                width={640}
+                height={640}
+                priority
+                src="/hero-image.svg"
+                alt="Illustration d’étudiantes et étudiants recherchant un stage"
+                className="h-auto w-full object-contain"
+              />
+              <div className="pointer-events-none absolute inset-x-6 bottom-6 rounded-2xl border border-white/50 bg-white/90 p-4 shadow-lg backdrop-blur">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-600">
+                  En confiance
+                </p>
+                <p className="mt-1 text-sm text-gray-600">
+                  +180K étudiantes et étudiants utilisent Stage Scout chaque mois
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="grid md:grid-cols-4 gap-4 sm:grid-cols-2 grid-cols-1">
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <HeroStatCard key={stat.title} {...stat} />
           ))}
@@ -125,38 +134,39 @@ function HeroSectionForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="md:flex items-center border rounded-md w-full p-2 mt-10 bg-white shadow-lg"
+      className="mt-8 w-full rounded-2xl border border-blue-100 bg-white/90 p-4 shadow-xl backdrop-blur"
     >
-      <div className="flex items-center w-full">
-        <div className="flex items-center w-1/2">
-          <Search className="h-6 w-6 ml-2" color="#0A65CC" />
-          <Input
-            className="border-none shadow-none focus-visible:outline-none focus-visible:ring-0"
-            type="text"
-            placeholder="Nom du poste, Entreprise..."
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            aria-label="Rechercher un stage par mot-clé"
-          />
+      <fieldset className="flex flex-col gap-3" aria-label="Rechercher un stage">
+        <legend className="sr-only">Formulaire de recherche</legend>
+        <div className="flex flex-col gap-3 md:flex-row">
+          <label className="flex flex-1 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-600 shadow-inner focus-within:border-blue-500 focus-within:bg-white">
+            <Search className="h-5 w-5 text-blue-500" aria-hidden />
+            <Input
+              className="border-none bg-transparent p-0 text-base shadow-none focus-visible:ring-0"
+              type="text"
+              placeholder="Nom du poste, entreprise…"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              aria-label="Rechercher un stage par mot-clé"
+            />
+          </label>
+          <label className="flex flex-1 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-600 shadow-inner focus-within:border-blue-500 focus-within:bg-white">
+            <MapPin className="h-5 w-5 text-blue-500" aria-hidden />
+            <Input
+              className="border-none bg-transparent p-0 text-base shadow-none focus-visible:ring-0"
+              type="text"
+              placeholder="Localisation"
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
+              aria-label="Ville ou région"
+            />
+          </label>
         </div>
-        <Separator orientation="vertical" className="h-9" />
-        <div className="flex items-center w-1/2">
-          <MapPin className="h-6 w-6 ml-2 text-primary" />
-          <Input
-            className="border-none shadow-none focus-visible:outline-none focus-visible:ring-0"
-            type="text"
-            placeholder="Localisation"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
-            aria-label="Ville ou région"
-          />
-        </div>
-      </div>
-
-      <Separator orientation="horizontal" className="md:hidden" />
-      <Button type="submit" className="w-full md:w-auto mt-2 md:mt-0 h-9 py-6">
-        Trouver un stage
-      </Button>
+        <Separator className="hidden md:block" />
+        <Button type="submit" className="h-12 w-full text-base font-semibold">
+          Trouver un stage
+        </Button>
+      </fieldset>
     </form>
   );
 }
