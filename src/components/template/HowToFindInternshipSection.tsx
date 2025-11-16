@@ -24,7 +24,7 @@ const steps: Step[] = [
     title: "Téléchargez votre CV",
     description: "Curabitur sit amet maximus ligula. Nam a nulla ante.",
     icon: <Upload className="h-6 w-6" />,
-    highlight: true, // L'étape en surbrillance
+    highlight: true, // L’étape en surbrillance
   },
   {
     id: 3,
